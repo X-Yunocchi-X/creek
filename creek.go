@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// TODO: append, delete fun, change comparable
 type Stream[T comparable] struct {
 	arr []T
 	len int

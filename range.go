@@ -14,3 +14,5 @@ func Range[T judge.SignedInt](start, end T, other ...any) []T {
 }
 
 // TODO: { x | x ∈ setA ∧ x ∈ setB }
+
+// TODO: pattern match
