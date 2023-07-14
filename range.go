@@ -5,10 +5,20 @@ import (
 )
 
 // TODO: unsigned int, overflow check, other for self-function
-func Range[T judge.SignedInt](start, end T, other ...any) []T {
+func Range[T judge.SignedInt](start, end T, other ...func(T) T) []T {
+	if len(other) > 1 {
+		return nil
+	}
 	res := make([]T, end-start)
-	for i := range res {
-		res[i] = start + T(i)
+	n := len(res)
+	f := func(t T) T {
+		return t
+	}
+	if len(other) == 1 {
+		f = other[0]
+	}
+	for i := 0; i < n; i++ {
+		res[i] = f(T(i) + start)
 	}
 	return res
 }

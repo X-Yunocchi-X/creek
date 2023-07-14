@@ -53,4 +53,33 @@ func Abs[T SignedInt | Float](v T) T {
 	return v
 }
 
+func Multi[T Judgable](v1, v2 T) T {
+	return v1 * v2
+}
+
 // TODO: Exp function
+func Exp[T Judgable](v T, x int) T {
+	return exp(v, x)
+}
+
+// ! x >= 0, v >= 0
+func exp[T Judgable](v T, x int) T {
+	if v == 0 && x == 0 {
+		panic("0^0 is undefined")
+	}
+	if v == T(0) {
+		return T(0)
+	}
+	if x == 0 {
+		return T(1)
+	}
+	if x < 0 || v < 0 {
+		panic("shouldn't acheive this")
+	}
+	// TODO: fast pow algorithm
+	var res T
+	for i := 1; i <= x; i++ {
+		res *= v
+	}
+	return res
+}

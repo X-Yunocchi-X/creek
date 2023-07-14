@@ -8,7 +8,6 @@ import (
 type Stream[T comparable] struct {
 	arr []T
 	len int
-	fun func([]T) any
 }
 
 func New[T comparable](s []T) Stream[T] {
@@ -75,17 +74,6 @@ func (s Stream[T]) Register(f func(T)) {
 	for _, v := range s.arr {
 		f(v)
 	}
-}
-
-func (s *Stream[T]) Injection(f func([]T) any) {
-	s.fun = f
-}
-
-func (s Stream[T]) Get() any {
-	if s.fun == nil {
-		return nil
-	}
-	return s.fun(s.arr)
 }
 
 func (s Stream[T]) Any(f func(T) bool) bool {
